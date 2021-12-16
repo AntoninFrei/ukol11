@@ -3,6 +3,7 @@ package com.engeto.ukol11;
 import java.math.BigDecimal;
 import java.util.List;
 
+
 public interface GoodsMethods {
 
     /**

@@ -1,3 +1,4 @@
+import com.engeto.ukol11.Goods;
 import com.engeto.ukol11.Item;
 
 import java.math.BigDecimal;
@@ -38,8 +39,9 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        BigDecimal newPrice = new BigDecimal(152.5);
-        updatePrice(4, newPrice);
+        Goods good = new Goods();
+        BigDecimal newPrice = new BigDecimal(1052.5);
+        good.updatePrice(4, newPrice);
         List items = new ArrayList();
         items = loadAllAvailableItems();
         printOutOfStockItems();
@@ -60,58 +62,60 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Item item = getItem(1);
+        //Item item = getItem(1);
+        Item item2 = new Item();
+        item2.loadItemById(3);
 
 
 
 
     }
 
-    static Item getItem(int id) {
-        System.out.println("Načtení položky " + id);
+//    static Item getItem(int id) {
+//        System.out.println("Načtení položky " + id);
+//
+//        Item item = new Item();
+//        try (
+//
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
+//            String prikaz = "SELECT * FROM item WHERE id = " + id;
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(prikaz);
+//
+//            while(resultSet.next()) {
+//                item.setId(resultSet.getInt("id"));
+//                item.setPartNo(resultSet.getString("partNo"));
+//                item.setSerialNo(resultSet.getString("serialNo"));
+//                item.setName(resultSet.getString("name"));
+//                item.setDescription(resultSet.getString("description"));
+//                item.setNumberInStock(resultSet.getInt("numberInStock"));
+//                item.setPrice(resultSet.getBigDecimal("price"));
+//                System.out.println("xxx");
+//
+//
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return item;
+//    }
 
-        Item item = new Item();
-        try (
-
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            String prikaz = "SELECT * FROM item WHERE id = " + id;
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(prikaz);
-
-            while(resultSet.next()) {
-                item.setId(resultSet.getInt("id"));
-                item.setPartNo(resultSet.getString("partNo"));
-                item.setSerialNo(resultSet.getString("serialNo"));
-                item.setName(resultSet.getString("name"));
-                item.setDescription(resultSet.getString("description"));
-                item.setNumberInStock(resultSet.getInt("numberInStock"));
-                item.setPrice(resultSet.getBigDecimal("price"));
-                System.out.println("xxx");
 
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return item;
-    }
-
-
-
-    static void updatePrice(Integer id, BigDecimal newPrice) {
-        try (
-
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
-                        "root", "Tisnov1/"); ) {
-            String prikaz = "UPDATE item SET price = " + newPrice + " WHERE id = " + id + ";";
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(prikaz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    };
+//    static void updatePrice(Integer id, BigDecimal newPrice) {
+//        try (
+//
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
+//                        "root", "Tisnov1/"); ) {
+//            String prikaz = "UPDATE item SET price = " + newPrice + " WHERE id = " + id + ";";
+//            Statement statement = connection.createStatement();
+//            statement.executeUpdate(prikaz);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    };
 
     static
     void deleteAllOutOfStockItems() {
