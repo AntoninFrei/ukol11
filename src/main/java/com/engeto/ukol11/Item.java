@@ -1,6 +1,7 @@
 package com.engeto.ukol11;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 
 public class Item {
 
@@ -73,5 +74,17 @@ public class Item {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+    /*
+    public  void setItem(ResultSet resultSet) {
+        this.setId(resultSet.getInt("id"));
+        this.setPartNo(resultSet.getString("partNo"));
+        this.setSerialNo(resultSet.getString("serialNo"));
+        this.setName(resultSet.getString("name"));
+        this.setDescription(resultSet.getString("description"));
+        this.setNumberInStock(resultSet.getInt("numberInStock"));
+        this.setPrice(resultSet.getBigDecimal("price"));
+
+    }*/
+
 
 }
