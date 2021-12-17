@@ -85,8 +85,8 @@ public class Goods implements GoodsMethods  {
     public void updatePrice(Integer id, BigDecimal newPrice) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
                         "root", "Tisnov1/"); ) {
-            String prikaz = "UPDATE item SET price = " + newPrice + " WHERE id = " + id + ";";
             Statement statement = connection.createStatement();
+            String prikaz = "UPDATE item SET price = " + newPrice + " WHERE id = " + id + ";";
             statement.executeUpdate(prikaz);
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,12 +94,8 @@ public class Goods implements GoodsMethods  {
 
     }
 
-    static public Statement setConnection() throws Exception {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/");) {
-            return  connection.createStatement();
 
-        }
 
-    }
+
 
 }

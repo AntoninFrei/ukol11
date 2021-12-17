@@ -82,103 +82,11 @@ public class Item  {
             this.price = price;
         }
 
-        public void decreNumberInStock (Integer decreInStock){
-        this.numberInStock -= decreInStock;
-    }
-
-
-
-    /*
-    public  void setItem(ResultSet resultSet) {
-        this.setId(resultSet.getInt("id"));
-        this.setPartNo(resultSet.getString("partNo"));
-        this.setSerialNo(resultSet.getString("serialNo"));
-        this.setName(resultSet.getString("name"));
-        this.setDescription(resultSet.getString("description"));
-        this.setNumberInStock(resultSet.getInt("numberInStock"));
-        this.setPrice(resultSet.getBigDecimal("price"));
-
-    }*/
-
-//        public List<Item> loadAllAvailableItems () {
-//            List items = new ArrayList();
-//            try (
-//
-//                    Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/");) {
-//                String prikaz = "SELECT * FROM item WHERE numberInStock > 0";
-//                Statement statement = connection.createStatement();
-//                ResultSet resultSet = statement.executeQuery(prikaz);
-//
-//                while (resultSet.next()) {
-//
-//                    System.out.println("xxx");
-//
-//
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            return items;
-//        }
-
-
-//    public Item loadItemById(int id) {
-//        System.out.println("Načtení položky " + id);
-//    Item item = new Item();
-//        try (
-//
-//    Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-//        String prikaz = "SELECT * FROM item WHERE id = " + id;
-//        Statement statement = connection.createStatement();
-//        ResultSet resultSet = statement.executeQuery(prikaz);
-//
-//        while(resultSet.next()) {
-//            this.setId(resultSet.getInt("id"));
-//            this.setPartNo(resultSet.getString("partNo"));
-//            this.setSerialNo(resultSet.getString("serialNo"));
-//            this.setName(resultSet.getString("name"));
-//            this.setDescription(resultSet.getString("description"));
-//            this.setNumberInStock(resultSet.getInt("numberInStock"));
-//            this.setPrice(resultSet.getBigDecimal("price"));
-//            System.out.println("cena " + this.price);
-//
-//
-//        }
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//
-//        return item;
-//}
-//    public void deleteAllOutOfStockItems(){
-//        System.out.println("xxx");
-//    }
-//
-//
-//
-//    /**
-//     * This method saves the given item
-//     * @param item - item to be saved
-//     */
-//    public void saveItem(Item item) {
-//        System.out.println("xxx");
-//    }
-//
-//    /**
-//     * This method updates a price of an item
-//     * @param id - id of an item which price is to be updated
-//     * @param newPrice - new price
-//     */
-//    public void updatePrice(Integer id, BigDecimal newPrice){
-//        System.out.println("xxx");
-//    }
-
 
 
     public void setFromDB (ResultSet resultSet) throws SQLException {
 
         this.setId(resultSet.getInt("id"));
-        System.out.println("Zpracovávám id: " + this.getId());
         this.setPartNo(resultSet.getString("partNo"));
         this.setSerialNo(resultSet.getString("serialNo"));
         this.setName(resultSet.getString("name"));
