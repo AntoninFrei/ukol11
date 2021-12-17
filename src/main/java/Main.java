@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("xxx");
 
+
         try (
                 Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
 
@@ -40,33 +41,54 @@ public class Main {
             e.printStackTrace();
         }
         Goods good = new Goods();
+
+        List items = new ArrayList();
+        items = good.loadAllAvailableItems();
+
+
         BigDecimal newPrice = new BigDecimal(1052.5);
         good.updatePrice(4, newPrice);
 
 
-        List items = new ArrayList();
-        items = good.loadAllAvailableItems();
+
         printOutOfStockItems();
         printOnfStockItems();
         good.deleteAllOutOfStockItems();
-        System.out.println("xxx");
-        try (
-                //Connection connection = DriverManager.getConnection("jdbc:mysql://loacalhost:3306/lekce11", "root", "Tisnov1/" );) {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            String prikaz = "SELECT * FROM item";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(prikaz);
-            while(resultSet.next()) {
-                System.out.println("ID: " + resultSet.getInt("id")
-                        + ", cena: " + resultSet.getBigDecimal("price")
-                        + ", skladem: " + resultSet.getInt("numberInStock"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+//        try (
+//                //Connection connection = DriverManager.getConnection("jdbc:mysql://loacalhost:3306/lekce11", "root", "Tisnov1/" );) {
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
+//            String prikaz = "SELECT * FROM item";
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(prikaz);
+//            while(resultSet.next()) {
+//                System.out.println("ID: " + resultSet.getInt("id")
+//                        + ", cena: " + resultSet.getBigDecimal("price")
+//                        + ", skladem: " + resultSet.getInt("numberInStock"));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         //Item item = getItem(1);
-        Item item2 = new Item();
-        item2.loadItemById(3);
+        Item item = new Item();
+        item = good.loadItemById(3);
+
+        System.out.println("Vrácená položka:\n" + item.totalDescrition());
+
+
+        item.setId(6);
+        item.setPartNo("XXL");
+        item.setSerialNo("XXL-1");
+        item.setName("Nove zbozi");
+        item.setDescription("popis noveho zbozi");
+        item.setNumberInStock(1500);
+        item.setPrice(new BigDecimal(1490));
+
+        good.saveItem(item);
+
+        Item itemBack = good.loadItemById(6);
+        System.out.println("Vrácená položka:\n" + itemBack.totalDescrition());
+
 
 
 
@@ -200,4 +222,6 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+
 }
