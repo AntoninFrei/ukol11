@@ -42,11 +42,13 @@ public class Main {
         Goods good = new Goods();
         BigDecimal newPrice = new BigDecimal(1052.5);
         good.updatePrice(4, newPrice);
+
+
         List items = new ArrayList();
-        items = loadAllAvailableItems();
+        items = good.loadAllAvailableItems();
         printOutOfStockItems();
         printOnfStockItems();
-        deleteAllOutOfStockItems();
+        good.deleteAllOutOfStockItems();
         System.out.println("xxx");
         try (
                 //Connection connection = DriverManager.getConnection("jdbc:mysql://loacalhost:3306/lekce11", "root", "Tisnov1/" );) {
@@ -117,20 +119,20 @@ public class Main {
 //
 //    };
 
-    static
-    void deleteAllOutOfStockItems() {
-        try (
-
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
-                        "root", "Tisnov1/"); ) {
-            String prikaz = "DELETE FROM item WHERE numberInStock = 0;";
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(prikaz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+//    static
+//    void deleteAllOutOfStockItems() {
+//        try (
+//
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
+//                        "root", "Tisnov1/"); ) {
+//            String prikaz = "DELETE FROM item WHERE numberInStock = 0;";
+//            Statement statement = connection.createStatement();
+//            statement.executeUpdate(prikaz);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
     static void printOutOfStockItems() {
@@ -151,35 +153,35 @@ public class Main {
         }
     }
 
-    static List<Item> loadAllAvailableItems() {
-     List items = new ArrayList();
-        try (
-
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            String prikaz = "SELECT * FROM item WHERE numberInStock > 0";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(prikaz);
-
-            while(resultSet.next()) {
-                Item item = new Item();
-                item.setId(resultSet.getInt("id"));
-                System.out.println("Zpracovávám id: " + item.getId());
-                item.setPartNo(resultSet.getString("partNo"));
-                item.setSerialNo(resultSet.getString("serialNo"));
-                item.setName(resultSet.getString("name"));
-                item.setDescription(resultSet.getString("description"));
-                item.setNumberInStock(resultSet.getInt("numberInStock"));
-                item.setPrice(resultSet.getBigDecimal("price"));
-                items.add(item);
-                System.out.println("xxx");
-
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-     return items;
-    }
+//    static List<Item> loadAllAvailableItems() {
+//     List items = new ArrayList();
+//        try (
+//
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
+//            String prikaz = "SELECT * FROM item WHERE numberInStock > 0";
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(prikaz);
+//
+//            while(resultSet.next()) {
+//                Item item = new Item();
+//                item.setId(resultSet.getInt("id"));
+//                System.out.println("Zpracovávám id: " + item.getId());
+//                item.setPartNo(resultSet.getString("partNo"));
+//                item.setSerialNo(resultSet.getString("serialNo"));
+//                item.setName(resultSet.getString("name"));
+//                item.setDescription(resultSet.getString("description"));
+//                item.setNumberInStock(resultSet.getInt("numberInStock"));
+//                item.setPrice(resultSet.getBigDecimal("price"));
+//                items.add(item);
+//                System.out.println("xxx");
+//
+//
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//     return items;
+//    }
 
     static void printOnfStockItems() {
         try (
