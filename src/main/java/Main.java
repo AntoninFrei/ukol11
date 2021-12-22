@@ -47,7 +47,7 @@ public class Main {
 
 
         BigDecimal newPrice = new BigDecimal(1052.5);
-        good.updatePrice(4, newPrice);
+        good.updatePrice(3, newPrice);
 
 
 
@@ -71,6 +71,9 @@ public class Main {
         good.saveItem(item);
 
         Item itemBack = good.loadItemById(6);
+        System.out.println("Vrácená položka:\n" + itemBack.totalDescrition());
+
+        itemBack = good.loadItemById(3);
         System.out.println("Vrácená položka:\n" + itemBack.totalDescrition());
 
 

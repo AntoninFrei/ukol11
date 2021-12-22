@@ -87,11 +87,13 @@ public class Item  {
     public void setFromDB (ResultSet resultSet) throws SQLException {
 
         this.setId(resultSet.getInt("id"));
+        System.out.println(this.getId());
         this.setPartNo(resultSet.getString("partNo"));
         this.setSerialNo(resultSet.getString("serialNo"));
         this.setName(resultSet.getString("name"));
         this.setDescription(resultSet.getString("description"));
         this.setNumberInStock(resultSet.getInt("numberInStock"));
+        System.out.println(this.getNumberInStock());
         this.setPrice(resultSet.getBigDecimal("price"));
 
     }

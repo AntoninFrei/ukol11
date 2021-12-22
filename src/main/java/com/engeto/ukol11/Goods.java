@@ -11,10 +11,13 @@ public class Goods implements GoodsMethods  {
         System.out.println("Načtení položky " + id);
         Item item = new Item();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            Statement statement = connection.createStatement();
-
+            //Statement statement = connection.createStatement();
             String prikaz = "SELECT * FROM item WHERE id = " + id;
-            ResultSet resultSet = statement.executeQuery(prikaz);
+            //PreparedStatement resultSet = connection.prepareStatement(prikaz);
+            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            //ResultSet resultSet = statement.executeQuery(prikaz);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while(resultSet.next()) {
                 item.setFromDB(resultSet);
                 System.out.println("cena " + item.getPrice());
@@ -31,9 +34,11 @@ public class Goods implements GoodsMethods  {
     public void deleteAllOutOfStockItems() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
                         "root", "Tisnov1/"); ) {
-            Statement statement = connection.createStatement();
+            //Statement statement = connection.createStatement();
             String prikaz = "DELETE FROM item WHERE numberInStock = 0;";
-            statement.executeUpdate(prikaz);
+            //statement.executeUpdate(prikaz);
+            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            preparedStatement.execute(prikaz);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,9 +49,10 @@ public class Goods implements GoodsMethods  {
     public List<Item> loadAllAvailableItems() {
         List items = new ArrayList();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            Statement statement = connection.createStatement();
+            //Statement statement = connection.createStatement();
             String prikaz = "SELECT * FROM item WHERE numberInStock > 0";
-            ResultSet resultSet = statement.executeQuery(prikaz);
+            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            ResultSet resultSet = preparedStatement.executeQuery(prikaz);
 
             while(resultSet.next()) {
                 Item item = new Item();
@@ -73,8 +79,10 @@ public class Goods implements GoodsMethods  {
                     + "', '" + item.getDescription()
                     + "', "  + item.getNumberInStock()
                     + ", " + item.getPrice() + ");";
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(prikaz);
+            //Statement statement = connection.createStatement();
+            //statement.executeUpdate(prikaz);
+            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            preparedStatement.execute(prikaz);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,9 +93,11 @@ public class Goods implements GoodsMethods  {
     public void updatePrice(Integer id, BigDecimal newPrice) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item",
                         "root", "Tisnov1/"); ) {
-            Statement statement = connection.createStatement();
+            //Statement statement = connection.createStatement();
             String prikaz = "UPDATE item SET price = " + newPrice + " WHERE id = " + id + ";";
-            statement.executeUpdate(prikaz);
+            //statement.executeUpdate(prikaz);
+            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            preparedStatement.execute(prikaz);
         } catch (Exception e) {
             e.printStackTrace();
         }
