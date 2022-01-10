@@ -11,12 +11,16 @@ public class Goods implements GoodsMethods  {
         System.out.println("Načtení položky " + id);
         Item item = new Item();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/item", "root", "Tisnov1/"); ) {
-            //Statement statement = connection.createStatement();
-            String prikaz = "SELECT * FROM item WHERE id = " + id;
+            Statement statement = connection.createStatement();
+            //String prikaz = "SELECT * FROM item WHERE id = " + id;
+            String prikaz = "SELECT * FROM item WHERE id = ?";
             //PreparedStatement resultSet = connection.prepareStatement(prikaz);
-            PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            //PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
+            PreparedStatement stmt = connection.prepareStatement(prikaz);
+            stmt.setInt(1, id);
             //ResultSet resultSet = statement.executeQuery(prikaz);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            //ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = stmt.executeQuery();
 
             while(resultSet.next()) {
                 item.setFromDB(resultSet);
